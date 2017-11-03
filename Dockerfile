@@ -5,6 +5,7 @@ MAINTAINER stpork from Mordor team
 ENV BAMBOO_AGENT_VERSION	6.2.2
 ENV BAMBOO_AGENT_INSTALL	/opt/atlassian/bamboo-agent
 ENV BAMBOO_AGENT_HOME		/var/atlassian/application-data/bamboo-agent
+ENV HOME					$BAMBOO_AGENT_HOME/home
 ENV BAMBOO_AGENT_USER		daemon
 ENV BAMBOO_AGENT_GROUP		daemon
 
@@ -20,8 +21,13 @@ RUN mkdir -p ${BAMBOO_AGENT_INSTALL} \
     && curl -o ${BAMBOO_AGENT_INSTALL}/bamboo-agent-installer.jar -L --silent ${BAMBOO_AGENT_URL} \
     && mkdir -p ${BAMBOO_AGENT_INSTALL} \
     && mkdir -p ${BAMBOO_AGENT_HOME}  \
+    && mkdir -p ${HOME} \
+    && mkdir -p ${HOME}/.m2 \
+    && curl -o ${HOME}/.m2/settings.xml -L --silent ${M2_URL} \
     && chown -R ${BAMBOO_USER}:${BAMBOO_GROUP} ${BAMBOO_AGENT_INSTALL} \
-    && chown -R ${BAMBOO_USER}:${BAMBOO_GROUP} ${BAMBOO_AGENT_HOME}
+    && chmod -R 777 ${BAMBOO_AGENT_INSTALL} \
+    && chown -R ${BAMBOO_USER}:${BAMBOO_GROUP} ${BAMBOO_AGENT_HOME} \
+    && chmod -R 777 ${BAMBOO_AGENT_HOME} 
 
 USER ${BAMBOO_USER}:${BAMBOO_GROUP}
 
