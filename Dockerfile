@@ -35,4 +35,4 @@ WORKDIR ${BAMBOO_AGENT_HOME}
 COPY entrypoint.sh /entrypoint.sh
 
 CMD ["/entrypoint.sh"]
-ENTRYPOINT ["/sbin/tini", "--"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
