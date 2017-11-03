@@ -3,7 +3,7 @@ FROM stpork/bamboo-centos-base
 MAINTAINER stpork from Mordor team
 
 ENV BAMBOO_AGENT_VERSION	6.2.2
-ENV BAMBOO_AGENT_INSTALL	/var/atlassian/application-data/bamboo-agent
+ENV BAMBOO_AGENT_INSTALL	${BAMBOO_HOME}/bamboo-agent
 ENV BAMBOO_AGENT_USER		daemon
 ENV BAMBOO_AGENT_GROUP		daemon
 
