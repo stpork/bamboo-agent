@@ -10,7 +10,7 @@ ENV BAMBOO_AGENT_JAR=atlassian-bamboo-agent-installer-${BAMBOO_VERSION}.jar
 
 # Set the labels that are used for OpenShift to describe the builder image.
 LABEL io.k8s.description="Atlassian Bamboo Agent"
-LABEL io.k8s.display-name="Bamboo Agent ${BAMBOO_AGENT_VERSION}"
+LABEL io.k8s.display-name="Bamboo Agent ${BAMBOO_VERSION}"
 
 USER root
 
