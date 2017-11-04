@@ -24,7 +24,7 @@ CATALINA_OPTS="${CATALINA_OPTS} -DcatalinaConnectorSecure=${CATALINA_CONNECTOR_S
 
 JAVA_OPTS="-Dbamboo.fs.timestamp.precision=1000 ${JAVA_OPTS} ${CATALINA_OPTS}"
 
-ARGS="http://bamboo:8085/agentServer/ $@"
+ARGS="$@"
 
 # Start Bamboo as the correct user.
 if [ "${UID}" -eq 0 ]; then
@@ -38,7 +38,7 @@ if [ "${UID}" -eq 0 ]; then
             chown -R "${BAMBOO_USER}:${BAMBOO_GROUP}" "${BAMBOO_HOME}"
     fi
     # Now drop privileges
-    exec su -s /bin/bash "${BAMBOO_USER}" -c java -jar  -Dbamboo.home=$HOME "${BAMBOO_AGENT_INSTALL}/bamboo-agent-installer.jar ${ARGS}"
+    exec su -s /bin/bash "${BAMBOO_USER}" -c "java -jar $BAMBOO_AGENT_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}"
 else
-    exec java -jar -Dbamboo.home=$HOME "${BAMBOO_AGENT_INSTALL}/bamboo-agent-installer.jar" ${ARGS}
+    exec java -jar $BAMBOO_AGENT_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}
 fi

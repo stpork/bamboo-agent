@@ -1,4 +1,4 @@
-IMAGE_NAME = bamboo-agent-centos
+IMAGE_NAME = bamboo-agent
 
 .PHONY: build
 build:
