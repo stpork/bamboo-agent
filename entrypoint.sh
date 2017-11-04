@@ -28,17 +28,17 @@ ARGS="$@"
 
 # Start Bamboo as the correct user.
 if [ "${UID}" -eq 0 ]; then
-    echo "User is currently root. Will change directory ownership to ${BAMBOO_USER}:${BAMBOO_GROUP}, then downgrade permission to ${BAMBOO_USER}"
+    echo "User is currently root. Will change directory ownership to ${RUN_USER}:${RUN_GROUP}, then downgrade permission to ${RUN_USER}"
     PERMISSIONS_SIGNATURE=$(stat -c "%u:%U:%a" "${BAMBOO_HOME}")
-    EXPECTED_PERMISSIONS=$(id -u ${BAMBOO_USER}):${BAMBOO_USER}:700
+    EXPECTED_PERMISSIONS=$(id -u ${RUN_USER}):${RUN_USER}:700
     if [ "${PERMISSIONS_SIGNATURE}" != "${EXPECTED_PERMISSIONS}" ]; then
         echo "Updating permissions for BAMBOO_HOME"
         mkdir -p "${BAMBOO_HOME}/lib" &&
             chmod -R 700 "${BAMBOO_HOME}" &&
-            chown -R "${BAMBOO_USER}:${BAMBOO_GROUP}" "${BAMBOO_HOME}"
+            chown -R "${RUN_USER}:${RUN_GROUP}" "${BAMBOO_HOME}"
     fi
     # Now drop privileges
-    exec su -s /bin/bash "${BAMBOO_USER}" -c "java -jar $BAMBOO_AGENT_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}"
+    exec su -s /bin/bash "${RUN_USER}" -c "java -jar $BAMBOO_AGENT_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}"
 else
     exec java -jar $BAMBOO_AGENT_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}
 fi

@@ -17,13 +17,13 @@ USER root
 RUN BAMBOO_AGENT_URL=https://bitbucket.org/stpork/bamboo-agent/downloads/${BAMBOO_AGENT_JAR} \
 && M2_URL=https://bitbucket.org/stpork/bamboo-agent/downloads/settings.xml \
 && mkdir -p ${BAMBOO_AGENT_INSTALL} \
-&& curl -o ${BAMBOO_AGENT_INSTALL}/${BAMBOO_AGENT_JAR} -L --silent ${BAMBOO_AGENT_URL} \
+&& curl -o ${BAMBOO_AGENT_INSTALL}/${BAMBOO_AGENT_JAR} -fsSL ${BAMBOO_AGENT_URL} \
 && mkdir -p ${BAMBOO_AGENT_INSTALL} \
-&& curl -o ${HOME}/.m2/settings.xml -L --silent ${M2_URL} \
-&& chown -R ${BAMBOO_USER}:${BAMBOO_GROUP} ${BAMBOO_AGENT_INSTALL} \
+&& curl -o ${HOME}/.m2/settings.xml --fsSL ${M2_URL} \
+&& chown -R ${RUN_USER}:${RUN_GROUP} ${BAMBOO_AGENT_INSTALL} \
 && chmod -R 777 ${BAMBOO_AGENT_INSTALL} 
 
-USER ${BAMBOO_USER}:${BAMBOO_GROUP}
+USER ${RUN_USER}:${RUN_GROUP}
 
 COPY entrypoint.sh /entrypoint.sh
 
