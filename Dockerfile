@@ -21,7 +21,9 @@ RUN BAMBOO_AGENT_URL=https://bitbucket.org/stpork/bamboo-agent/downloads/${BAMBO
 && curl -o ${HOME}/.m2/settings.xml -fsSL ${M2_URL} \
 && git config --global core.logallrefupdates false \
 && chown -R ${RUN_USER}:${RUN_GROUP} ${BAMBOO_AGENT_INSTALL} \
-&& chmod -R 777 ${BAMBOO_AGENT_INSTALL} 
+&& chmod -R 777 ${BAMBOO_AGENT_INSTALL} \
+&& chown -R ${RUN_USER}:${RUN_GROUP} ${BAMBOO_HOME} \
+&& chmod -R 777 ${BAMBOO_HOME}
 
 USER ${RUN_USER}:${RUN_GROUP}
 
