@@ -38,7 +38,7 @@ if [ "${UID}" -eq 0 ]; then
             chown -R "${RUN_USER}:${RUN_GROUP}" "${BAMBOO_HOME}"
     fi
     # Now drop privileges
-    exec su -s /bin/bash "${RUN_USER}" -c "java -jar $BAMBOO_AGENT_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}"
+    exec su -s /bin/bash "${RUN_USER}" -c "java -jar $BAMBOO_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}"
 else
-    exec java -jar $BAMBOO_AGENT_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}
+    exec java -jar $BAMBOO_INSTALL/${BAMBOO_AGENT_JAR} ${BAMBOO_SERVER_URL} ${ARGS}
 fi
