@@ -23,7 +23,7 @@ M2_HOME=$MAVEN_HOME \
 PATH=$MAVEN_HOME/bin:$GRADLE_HOME/bin:$PATH \
 BAMBOO_AGENT_JAR=atlassian-bamboo-agent-installer-${BAMBOO_VERSION}.jar
 
-ENV _JAVA_OPTIONS=-Dbamboo.fs.timestamp.precision=1000 -Duser.home=$HOME
+ENV _JAVA_OPTIONS='-Dbamboo.fs.timestamp.precision=1000 -Duser.home=$HOME'
 
 LABEL io.k8s.description="Atlassian Bamboo Agent"
 LABEL io.k8s.display-name="Bamboo Agent ${BAMBOO_VERSION}"
