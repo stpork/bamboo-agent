@@ -92,7 +92,7 @@ RUN set -x \
 https://bitbucket.org/stpork/bamboo-agent/downloads/${BAMBOO_AGENT_JAR} \
 -o ${BAMBOO_INSTALL}/${BAMBOO_AGENT_JAR} \
 && chown -R ${RUN_USER}:${RUN_GROUP} ${BAMBOO_INSTALL} \
-&& chmod -R 755 ${BAMBOO_INSTALL} \
+&& chmod -R 777 ${BAMBOO_INSTALL} \
 && chown -R ${RUN_USER}:${RUN_GROUP} ${BAMBOO_HOME} \
 && chmod -R 777 ${BAMBOO_HOME} \
 && chmod -R 755 ${USR_LOCAL_BIN}
