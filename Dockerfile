@@ -59,7 +59,7 @@ RUN set -x \
 "$ALPINE_GLIBC_BIN_PACKAGE_FILENAME" \
 "$ALPINE_GLIBC_I18N_PACKAGE_FILENAME" \
 && apk add --no-cache ca-certificates wget curl git openssh bash procps openssl perl tini \
-&& rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* \
+&& rm -rf /var/cache/apk/* /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/* \
 && mkdir -p ${BAMBOO_INSTALL} \
 && mkdir -p ${BAMBOO_HOME} \
 && mkdir -p ${MAVEN_HOME} \
