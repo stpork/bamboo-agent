@@ -8,6 +8,7 @@ OCP_BUILD=008f2d5 \
 CLI_VERSION=7.2.0 \
 CLI_BUILD=16285777 \
 GRADLE_VERSION=4.3 \
+JMETER_VERSION=3.3 \
 MAVEN_VERSION=3.5.2 \
 BAMBOO_VERSION=6.2.3 \
 BAMBOO_INSTALL=/opt/atlassian/bamboo-agent \
@@ -16,11 +17,12 @@ BAMBOO_SERVER_URL=http://bamboo:8085/agentServer/ \
 RUN_USER=daemon \
 RUN_GROUP=daemon \
 MAVEN_HOME=/usr/local/maven \
-GRADLE_HOME=/usr/local/gradle
+GRADLE_HOME=/usr/local/gradle \
+JMETER_HOME=/usr/local/jmeter
 
 ENV HOME=$BAMBOO_HOME/home \
 M2_HOME=$MAVEN_HOME \
-PATH=$MAVEN_HOME/bin:$GRADLE_HOME/bin:$PATH \
+PATH=$MAVEN_HOME/bin:$GRADLE_HOME/bin:$JMETER_HOME/bin:$PATH \
 BAMBOO_AGENT_JAR=atlassian-bamboo-agent-installer-${BAMBOO_VERSION}.jar
 
 ENV JAVA_TOOL_OPTIONS="-Duser.home=${HOME} -Dbamboo.fs.timestamp.precision=1000"
@@ -74,6 +76,10 @@ RUN set -x \
 && curl -fsSL \
 "http://github.com/openshift/origin/releases/download/${OCP_VERSION}/openshift-origin-client-tools-${OCP_VERSION}-${OCP_BUILD}-linux-64bit.tar.gz" \
 | tar -xz --strip-components=1 -C ${USR_LOCAL_BIN} \
+&& mkdir -p ${JMETER_HOME} \
+&& curl -fsSL \
+"http://mirror.stjschools.org/public/apache/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz" \
+| tar -xz --strip-components=1 -C ${JMETER_HOME} \
 && cd ${BAMBOO_INSTALL} \
 && curl -fsSL \
 "http://bobswift.atlassian.net/wiki/download/attachments/${CLI_BUILD}/atlassian-cli-${CLI_VERSION}-distribution.zip" \
