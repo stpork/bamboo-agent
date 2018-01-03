@@ -18,7 +18,8 @@ RUN_USER=daemon \
 RUN_GROUP=daemon \
 MAVEN_HOME=/usr/local/maven \
 GRADLE_HOME=/usr/local/gradle \
-JMETER_HOME=/usr/local/jmeter
+JMETER_HOME=/usr/local/jmeter \
+MAVEN_SETTINGS_URL="https://bitbucket.org/stpork/bamboo-agent/downloads/settings.xml"
 
 ENV HOME=$BAMBOO_HOME/home \
 M2_HOME=$MAVEN_HOME \
@@ -70,7 +71,7 @@ RUN set -x \
 | tar -xz --strip-components=1 -C ${MAVEN_HOME} \
 && mkdir -p ${HOME}/.m2 \
 && curl -fsSL \
-"https://bitbucket.org/stpork/bamboo-agent/downloads/settings.xml" \
+${MAVEN_SETTINGS_URL} \
 -o ${HOME}/.m2/settings.xml \
 && USR_LOCAL_BIN=/usr/local/bin \
 && curl -fsSL \
