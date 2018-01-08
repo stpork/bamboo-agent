@@ -19,7 +19,7 @@ RUN_GROUP=daemon \
 MAVEN_HOME=/usr/local/maven \
 GRADLE_HOME=/usr/local/gradle \
 JMETER_HOME=/usr/local/jmeter \
-MAVEN_SETTINGS_URL="https://bitbucket.org/stpork/bamboo-agent/downloads/settings.xml"
+MAVEN_SETTINGS_URL="http://artifactory:8081/artifactory/generic-local/cicd/maven/settings.xml"
 
 ENV HOME=$BAMBOO_HOME/home \
 M2_HOME=$MAVEN_HOME \
